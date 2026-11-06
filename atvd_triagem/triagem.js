@@ -1,31 +1,47 @@
-// Sistema simples de classificação de atendimento da clínica
+const formulario = document.querySelector("#triage-form");
+const caixaResultado = document.querySelector("#resultado");
+const textoResultado = document.querySelector("#result-message");
 
-// Variáveis de exemplo: troque os valores para testar outros casos.
-let corPulseira = "amarela";
-let idadePaciente = 65;
-let gestante = false;
+formulario.addEventListener("submit", function (evento) {
+  evento.preventDefault();
 
-// A pulseira vermelha indica emergência e tem prioridade máxima.
-if (corPulseira === "vermelha") {
-  console.log("Atendimento de Emergência: Sala de trauma imediata");
+  let corPulseira = document.querySelector("#corPulseira").value;
+  let idadePaciente = Number(
+    document.querySelector("#idadePaciente").value
+  );
+  let gestante =
+    document.querySelector('input[name="gestante"]:checked').value === "sim";
 
-// A pulseira amarela indica urgência.
-} else if (corPulseira === "amarela") {
-  // || significa OU: basta ser idoso ou gestante para ter prioridade especial.
-  if (idadePaciente >= 60 || gestante === true) {
-    console.log("Atendimento Urgente: Prioridade Especial Preferencial");
+  let mensagem;
+
+  if (corPulseira === "vermelha") {
+    mensagem = "Atendimento de Emergência: Sala de trauma imediata";
+    caixaResultado.className = "result urgent";
+
+  } else if (corPulseira === "amarela") {
+    if (idadePaciente >= 60 || gestante === true) {
+      mensagem = "Atendimento Urgente: Prioridade Especial Preferencial";
+    } else {
+      mensagem = "Atendimento Urgente: Fila padrão amarela";
+    }
+
+    caixaResultado.className = "result urgent";
+
+  } else if (corPulseira === "verde") {
+    mensagem = idadePaciente < 12
+      ? "Encaminhar para Pediatria"
+      : "Encaminhar para Clínica Geral";
+
+    caixaResultado.className = "result";
+
   } else {
-    console.log("Atendimento Urgente: Fila padrão amarela");
+    mensagem = "Código de cor desconhecido";
+    caixaResultado.className = "result unknown";
+    alert("Código de cor desconhecido");
   }
 
-// Na pulseira verde, o operador ternário escolhe entre Pediatria e Clínica Geral.
-} else if (corPulseira === "verde") {
-  const encaminhamento = idadePaciente < 12
-    ? "Encaminhar para Pediatria"
-    : "Encaminhar para Clínica Geral";
-  console.log(encaminhamento);
+  textoResultado.textContent = mensagem;
+  caixaResultado.hidden = false;
 
-// Qualquer cor fora da lista é desconhecida.
-} else {
-  alert("Código de cor desconhecido");
-}
+  console.log(mensagem);
+});

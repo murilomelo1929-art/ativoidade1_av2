@@ -1,12 +1,114 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Triagem Médica | Clínica Horizonte</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="condicionais_seuNome.js" defer></script>
 </head>
 <body>
-    <h1>atividade</h1>
-    <script src="triagem.js"></script>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio">
+        <span class="brand-mark">✚</span>
+        <span>Clínica <strong>Horizonte</strong></span>
+      </a>
+      <span class="topbar-label">
+        <span class="status-dot"></span>
+        Painel de atendimento
+      </span>
+    </header>
+
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <span class="eyebrow">CUIDADO COMEÇA COM ACOLHIMENTO</span>
+        <h1>Triagem <span>médica</span></h1>
+        <p>Preencha os dados do paciente para consultar a orientação inicial de atendimento.</p>
+      </div>
+      <div class="hero-icon" aria-hidden="true">✚</div>
+    </section>
+
+    <section class="triage-card" aria-labelledby="form-title">
+      <div class="card-heading">
+        <div class="heading-icon">＋</div>
+        <div>
+          <h2 id="form-title">Dados do paciente</h2>
+          <p>As informações abaixo ajudam a definir a prioridade.</p>
+        </div>
+      </div>
+
+      <form id="triage-form">
+        <div class="field">
+          <label for="corPulseira">Cor da pulseira</label>
+          <div class="select-wrap">
+            <select id="corPulseira" name="corPulseira" required>
+              <option value="" disabled selected>Selecione uma cor</option>
+              <option value="vermelha">🔴 Vermelha — emergência</option>
+              <option value="amarela">🟡 Amarela — urgência</option>
+              <option value="verde">🟢 Verde — atendimento de rotina</option>
+              <option value="desconhecida">⚪ Outra cor</option>
+            </select>
+            <span class="select-arrow">⌄</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="idadePaciente">Idade do paciente</label>
+          <div class="input-wrap">
+            <input
+              id="idadePaciente"
+              name="idadePaciente"
+              type="number"
+              min="0"
+              step="1"
+              placeholder="Ex.: 35"
+              required
+            >
+            <span class="input-suffix">anos</span>
+          </div>
+        </div>
+
+        <fieldset class="field gestation-field">
+          <legend>Paciente está gestante?</legend>
+          <div class="radio-options">
+            <label class="radio-card">
+              <input type="radio" name="gestante" value="sim" required>
+              <span class="radio-dot"></span>
+              <span>Sim</span>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="gestante" value="nao">
+              <span class="radio-dot"></span>
+              <span>Não</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <button class="submit-button" type="submit">
+          <span>Ver orientação de atendimento</span>
+          <span class="button-arrow">→</span>
+        </button>
+      </form>
+
+      <div id="resultado" class="result" role="status" aria-live="polite" hidden>
+        <span id="result-icon" class="result-icon">✓</span>
+        <div>
+          <span class="result-label">ORIENTAÇÃO INICIAL</span>
+          <p id="result-message"></p>
+        </div>
+      </div>
+
+      <p class="disclaimer">
+        <span>ⓘ</span>
+        Esta demonstração é acadêmica e não substitui avaliação de um profissional de saúde.
+      </p>
+    </section>
+
+    <footer>
+      CLÍNICA HORIZONTE <span>•</span> SISTEMA DEMONSTRATIVO DE TRIAGEM
+    </footer>
+  </main>
 </body>
 </html>
